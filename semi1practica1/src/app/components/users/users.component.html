@@ -1,21 +1,159 @@
+<br>
 
-    <form #userForm="ngForm"  (ngSubmit)="addUser()">
-        <div class="form-group" >
-            <label for="exampleInputUsername1">Username</label>
-            <input type="Username" class="form-control" id="exampleInputUsername1" aria-describedby="UsernameHelp" placeholder="Enter Username">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputName1">Name</label>
-            <input type="Name" class="form-control" id="exampleInputName1" aria-describedby="NameHelp" placeholder="Enter Name">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputFoto1">Foto</label>
-            <input type="Foto" class="form-control" id="exampleInputFoto1" placeholder="Foto">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+<div class="row">
 
+    <!-- FORM -->
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body p-4">
+
+            <div class="center" *ngIf="perfil">
+              <img alt="foto perfil" width="100px" height="100px" [src]="perfil">
+            </div>
+          
+          <!-- FORM -->
+          <!--
+            <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+          -->
+          <form #userForm="ngForm">
+           
+            <!-- THE Id's User -->
+            <input type="hidden" name="id_" #idd #_id="ngModel" [(ngModel)]="userService.selectedUser.id_">
+            
+            <div class="form-group">
+              <input type="text" name="username" #usuario #name="ngModel" [(ngModel)]="userService.selectedUser.username"
+                placeholder="Enter your username" class="form-control">
+            </div>
+  
+            <div class="form-group">
+              <div class="input-field col-s12">
+                <input type="text" name="name" #nombre #name="ngModel" [(ngModel)]="userService.selectedUser.name"
+                  placeholder="Enter your name" class="form-control">
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <input type="text" name="password" #password #name="ngModel" [(ngModel)]="userService.selectedUser.password"
+                placeholder="Enter your password" class="form-control">
+            </div>
+            
+            <div class="form-group">
+              <div class="input-field col-s12">
+                <input type="hidden" name="foto" #foto #name="ngModel" [(ngModel)]="userService.selectedUser.foto"
+                  value="0" placeholder="Enter your foto" class="form-control">
+              </div>
+            </div>
+  
+            <button class="btn btn-primary mr-2" (click)="resetForm(userForm)">Clean</button>
+            <!--
+              <button class="btn btn-secondary mr-2">Save</button>
+            -->
+              
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  <!-- TABLE -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body p-4">
+
+        <div class="form-check">
+          <input #check (change)='checkOnClick(check.checked)' class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Editar foto
+          </label>
+        </div>
+
+        <!--INICIANDO CODIGO-->
+        <div class="row" class="center">
+          <div class="col-12">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <div class="row">
+                  <form>
+                    <div class="form-group">
+                        <fieldset class="form-group">
+                
+                            <label>Upload Foto</label>
+                            {{imageError}}
+                            <div  class="custom-file fileInputProfileWrap" >
+                                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                                <div class="img-space">
+                
+                                    <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                        <img alt="name" width="100px" height="100px" [src]="cardImageBase64" />
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <img alt="Buscar foto..." width="100px" height="100px" src="./../../assets/placeholder.png" class="img-responsive">
+                                    </ng-template>
+                
+                                </div>
+                
+                            </div>
+                        </fieldset>
+                    </div>
+                    <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--FINALZIANDO CODIGO-->
+
+        <button class="btn btn-dark" (click)="addUserComplete(userForm,idd.value,usuario.value,nombre.value,password.value,foto.value)">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+  </div>
+  
+</div>
+
+<hr>
+
+<div class="row">
+
+  <div class="col-md-3">
+  </div>
+
+  <!-- TABLE -->
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <thead>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Foto</th>
+        <th>Operacion</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userService.users">
+          <td>{{ user.usuario }}</td>
+          <td>{{ user.nombre }}</td>
+          <td>{{ user.password }}</td>
+          <td>{{ user.foto }}</td>
+          <td>
+            <a (click)="editUser(user)" class="btn btn-secondary btn-sm">
+              <i class="material-icons">edit</i>
+            </a>
+            <a (click)="deleteUser(user.id)" class="btn btn-primary btn-sm">
+              <i class="material-icons">delete</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-3">
+  </div>
+
+</div>

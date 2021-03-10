@@ -7,6 +7,7 @@ import { UsersComponent } from './components/users/users.component';
 
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DemoImage } from './components/images';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DemoImage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
