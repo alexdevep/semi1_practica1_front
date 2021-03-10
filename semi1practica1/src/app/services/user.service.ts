@@ -11,8 +11,7 @@ export class UserService {
   userLog: User; //Logueado actualmente
   users: User[]; //Arreglo inicial
   logUsers: User[]; //User loguin
-  //readonly URL_API = 'http://ec2-18-223-119-231.us-east-2.compute.amazonaws.com:5000';
-  readonly URL_API = 'http://localhost:5000';
+  readonly URL_API = 'http://Balanceador-practica1-semi1-257155305.us-east-2.elb.amazonaws.com';
 
   constructor(private http: HttpClient) {
     this.selectedUser = new User();
