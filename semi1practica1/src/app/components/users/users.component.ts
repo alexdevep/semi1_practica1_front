@@ -21,10 +21,7 @@ export class UsersComponent implements OnInit {
 
   constructor(public userService: UserService) {
   }
-  /*
-  data:image/jpg;base64,
-  data:image/jpeg;base64,
-  */
+  
   ngOnInit(): void {
     this.getUsers();
   }
@@ -37,8 +34,9 @@ export class UsersComponent implements OnInit {
           if(this.previewImagePath)
           {
             console.log('Editando usuario con foto...');
+            //username, name, password, foto, extension, image
             var user3 = new User3(usuario, nombre, password, "", "jpg", this.previewImagePath);
-            user3.id = id_;
+            user3.id = id_; //Agregando id
             console.log(user3);
 
             this.userService.putUserCompleto(user3)
@@ -139,7 +137,7 @@ export class UsersComponent implements OnInit {
     this.userService.selectedUser.foto = user.foto;
     console.log(this.userService.selectedUser);
 
-    this.perfil = 'https://s1bucket-practica1.s3.us-east-2.amazonaws.com/' + user.foto;
+    this.perfil = 'https://practica1-g18-imagenes.s3.us-east-2.amazonaws.com/' + user.foto;
     console.log(this.perfil);
   }
 

@@ -1,0 +1,37 @@
+
+<div class="row">
+
+  <div class="col-md-4">
+  </div>
+
+  <!-- TABLE -->
+  <div class="col-md-4" >
+    <div class="card">
+        <div class="card-body p-4">
+            <h1 align='center'>Login</h1>
+            <form #userForm="ngForm">
+                   
+                <div class="form-group">
+                    <input type="text" name="username" #usuario 
+                        placeholder="Ingrese su usuario" class="form-control">
+                </div>
+        
+                <div class="form-group">
+                    <input type="text" name="password" #password
+                        placeholder="Ingrese su contraseña" class="form-control">
+                </div>
+                
+                <div align='center'>
+                    <button class="btn btn-secondary mr-2" (click)="login(userForm,usuario.value,password.value)">Save</button>
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+  </div>
+
+</div>

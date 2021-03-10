@@ -8,11 +8,15 @@ import { UsersComponent } from './components/users/users.component';
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DemoImage } from './components/images';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent
+    UsersComponent,
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

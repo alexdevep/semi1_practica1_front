@@ -8,12 +8,19 @@ import { User, User3 } from '../models/user';
 export class UserService {
 
   selectedUser: User;
+  userLog: User; //Logueado actualmente
   users: User[]; //Arreglo inicial
+  logUsers: User[]; //User loguin
   //readonly URL_API = 'http://ec2-18-223-119-231.us-east-2.compute.amazonaws.com:5000';
   readonly URL_API = 'http://localhost:5000';
 
   constructor(private http: HttpClient) {
     this.selectedUser = new User();
+    this.userLog = new User();
+  }
+
+  login(user: User3){
+    return this.http.post(this.URL_API + `/login`, user);
   }
 
   postUser(user: User) {
