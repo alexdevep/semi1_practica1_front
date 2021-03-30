@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { User, User3 } from 'src/app/models/user';
 import { UserService } from '../../services/user.service';
 import { NgForm } from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { NgForm } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public userService: UserService, private zone: NgZone) { }
+  constructor(public userService: UserService, private zone: NgZone, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,19 +24,9 @@ export class LoginComponent implements OnInit {
     if(user3.username && user3.password){
       this.userService.login(user3)
           .subscribe(res => {
-            this.userService.logUsers = res as User[];
-            if(this.userService.logUsers[0])
-            {
-              this.userService.userLog = this.userService.logUsers[0];
-              console.log(this.userService.userLog);
-              this.resetForm(form);
-              this.zone.runOutsideAngular(() => {
-                window.location.href = '/users';
-              });
-            }
-            else{
-              console.log('Usuario no existe...');
-            }
+            console.log(res[0].id);
+            localStorage.setItem('id', res[0].id.toString());
+            this.router.navigate(['/dashboard']); //Perfil
           });
     }
   }

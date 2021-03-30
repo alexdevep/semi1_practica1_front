@@ -8,25 +8,36 @@
   <div class="col-md-4" >
     <div class="card">
         <div class="card-body p-4">
-            <h1 align='center'>Login</h1>
+            <h1 style="text-align:center">Login</h1>
             <form #userForm="ngForm">
                    
                 <div class="form-group">
-                    <input type="text" name="username" #usuario 
+                    <input style="text-align: center" type="text" name="username" #usuario 
                         placeholder="Ingrese su usuario" class="form-control">
                 </div>
         
                 <div class="form-group">
-                    <input type="text" name="password" #password
+                    <input style="text-align: center" type="password" name="password" #password
                         placeholder="Ingrese su contraseña" class="form-control">
                 </div>
                 
-                <div align='center'>
-                    <button class="btn btn-secondary mr-2" (click)="login(userForm,usuario.value,password.value)">Ingresar</button>
+                <div style="text-align:center">
+                    <button class="btn btn-dark mr-2" (click)="login(userForm,usuario.value,password.value)">Ingresar</button>
+                    <button class="btn btn-dark" routerLink="/camera">Ingresar con camara</button>
                 </div>
                 
                 
             </form>
+            <br>
+            <div style="text-align:center" class="flex-col-c p-t-60">
+                <span class="txt1 p-b-17">
+                    ¿No tienes cuenta?
+                </span>
+        
+                <a routerLink="/register" class="txt2">
+                    Crear una aquí
+                </a>
+            </div>
         </div>
     </div>
   </div>

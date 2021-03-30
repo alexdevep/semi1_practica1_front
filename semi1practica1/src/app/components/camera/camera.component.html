@@ -1,0 +1,67 @@
+<div class="row">
+
+  <div class="col-md-4">
+  </div>
+
+  <!-- TABLE -->
+  <div class="col-md-4" >
+    <div class="card">
+        <div class="card-body p-4">
+            <h1 style="text-align:center">Login</h1>
+            <div style="text-align:center">
+              <div style="text-align:center">
+                <webcam [height]="400" [width]="400" *ngIf="showWebcam"
+                        [trigger]="triggerObservable" 
+                        (imageCapture)="handleImage($event)"
+                        [imageQuality]="1"
+                        (initError)="handleInitError($event)"
+                ></webcam>
+                <br/>
+                <button class="btn btn-secondary mr-2" (click)="triggerSnapshot();">Tomar Foto</button>
+                <button class="btn btn-secondary" routerLink="/login">Regresar</button>
+                <br/>
+                <br/>
+              </div>
+
+            <div class="snapshot" *ngIf="webcamImage">
+              <h6>Nice!</h6>
+              <img style="max-width: 100px;  max-height: 100px;" [src]="webcamImage.imageAsDataUrl"/>
+              <br>
+              <form #userForm="ngForm">
+                   
+                <div class="form-group ">
+                    <input style="text-align: center" type="text" name="username" #usuario 
+                        placeholder="Ingrese su usuario" class="form-control">
+                </div>
+
+                <button class="btn btn-dark" (click)="loginPhoto(usuario.value);">Ingresar</button>
+              </form>
+              <br>
+              <div style="text-align:center" class="flex-col-c p-t-60">
+                <span class="txt1 p-b-17">
+                    ¿No tienes cuenta?
+                </span>
+        
+                <a routerLink="/register" class="txt2">
+                    Crear una aquí
+                </a>
+              </div>
+              <br>
+              
+            </div>
+            
+            <h4 *ngIf="errors.length > 0">Messages:</h4>
+            <ul *ngFor="let error of errors">
+              <li>{{error | json}}</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+  </div>
+
+</div>
+
+

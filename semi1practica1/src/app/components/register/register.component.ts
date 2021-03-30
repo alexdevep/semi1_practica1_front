@@ -3,14 +3,14 @@ import { UserService } from '../../services/user.service';
 import { NgForm } from "@angular/forms";
 import { User, User2, User3 } from "../../models/user";
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
-  providers: [UserService]
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class UsersComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   imageError: string;
   isImageSaved: boolean;
@@ -19,12 +19,20 @@ export class UsersComponent implements OnInit {
   editarFoto: boolean;
   perfil: string; //Muestra perfil actual a editar
 
-  constructor(public userService: UserService) {
-  }
-  
+  isLog: boolean;
+
+  constructor(public userService: UserService, private router: Router) { }
+
   ngOnInit(): void {
-    this.getUsers();
+    
+    if(localStorage.getItem("id")){
+      this.isLog = true;
+    }
+    else {
+      this.isLog = false;
+    }
   }
+
   
   addUserComplete(form: NgForm ,id_: string, usuario: string, nombre: string, password: string, foto: string){
     //console.log(this.previewImagePath); //Imprime el codigo de image64
@@ -43,7 +51,6 @@ export class UsersComponent implements OnInit {
             .subscribe(res => {
               console.log(res);
               this.resetForm(form);
-              this.getUsers();
             });
           }
           else{
@@ -59,7 +66,6 @@ export class UsersComponent implements OnInit {
           .subscribe(res => {
             console.log(res);
             this.resetForm(form);
-            this.getUsers();
           });
         }
       }
@@ -73,7 +79,6 @@ export class UsersComponent implements OnInit {
           .subscribe(res => {
             console.log(res);
             this.resetForm(form);
-            this.getUsers();
           });
 
         }else{
@@ -86,7 +91,6 @@ export class UsersComponent implements OnInit {
               
               console.log(res);
               this.resetForm(form);
-              this.getUsers();
 
             });
         }
@@ -104,7 +108,6 @@ export class UsersComponent implements OnInit {
         .subscribe(res => {
           console.log(res);
           this.resetForm(form);
-          this.getUsers();
         });
     }else{
       console.log('Insertando usuario...')
@@ -114,45 +117,9 @@ export class UsersComponent implements OnInit {
         
         console.log(res);
         this.resetForm(form);
-        this.getUsers();
 
       });
     }
-  }
-
-  getUsers(){
-    this.userService.getUsers()
-      .subscribe(res => {
-        this.userService.users = res as User[];
-        console.log(res);
-      });
-  }
-
-  editUser(user: User2){
-    console.log(user);
-
-    //Asignando de un modelo a otro
-    this.userService.selectedUser.id_ = user.id;
-    this.userService.selectedUser.username = user.usuario;
-    this.userService.selectedUser.name = user.nombre;
-    this.userService.selectedUser.password = user.password;
-    this.userService.selectedUser.foto = user.foto;
-    console.log(this.userService.selectedUser);
-
-    this.perfil = 'https://practica1-g18-imagenes.s3.us-east-2.amazonaws.com/' + user.foto;
-    //console.log(this.perfil);
-  }
-
-  deleteUser(id: string){
-    if(confirm('Esta seguro de eliminar este usuario?')){
-
-      this.userService.deleteUser(id)
-      .subscribe(res => {
-        console.log(res);
-        this.getUsers();
-      });
-
-    }    
   }
 
   resetForm(form?: NgForm){
@@ -225,4 +192,5 @@ export class UsersComponent implements OnInit {
     console.log('Editar foto: ' + check );
     this.editarFoto = check;
   }
+
 }

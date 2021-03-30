@@ -1,7 +1,7 @@
-import { Images } from './images';
+import { DemoImage } from './images';
 
 describe('Images', () => {
   it('should create an instance', () => {
-    expect(new Images()).toBeTruthy();
+    expect(new DemoImage()).toBeTruthy();
   });
 });
