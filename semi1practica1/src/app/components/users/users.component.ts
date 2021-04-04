@@ -139,7 +139,7 @@ export class UsersComponent implements OnInit {
     this.userService.selectedUser.foto = user.foto;
     console.log(this.userService.selectedUser);
 
-    this.perfil = 'https://practica1-g18-imagenes.s3.us-east-2.amazonaws.com/' + user.foto;
+    this.perfil = this.userService.dirBucket + user.foto;
     //console.log(this.perfil);
   }
 

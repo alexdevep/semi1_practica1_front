@@ -1,0 +1,30 @@
+<div style="width: 100%; height: 100%;">
+    <div class="card" style="width: 100%; height: 100%;">
+        <form>
+            <div class="form-group">
+                <fieldset class="form-group">
+                    {{imageError}}
+                    <div class="custom-file fileInputProfileWrap">
+                        <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                        <div class="img-space">
+
+                            <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                <img alt="name" width="100px" height="100px" [src]="cardImageBase64" />
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <img alt="Buscar foto..." width="100px" height="100px"
+                                    src="./../../assets/placeholder.png" class="img-responsive">
+                            </ng-template>
+
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+            <div style="align-content: center; align-items: center;">
+                <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a>
+            </div>
+            
+        </form>
+    </div>
+</div>

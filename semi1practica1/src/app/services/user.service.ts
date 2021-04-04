@@ -12,8 +12,11 @@ export class UserService {
   userLog: User; //Logueado actualmente
   users: User[]; //Arreglo inicial
   logUsers: User[]; //User login
+  photoB64: string;
+
   //readonly URL_API = 'http://Balanceador-practica1-semi1-257155305.us-east-2.elb.amazonaws.com';
   readonly URL_API = 'http://localhost:5000';
+  readonly dirBucket = 'https://practica1-g18-imagenes.s3.us-east-2.amazonaws.com/';
 
   constructor(private http: HttpClient, private router: Router) {
     this.selectedUser = new User();
@@ -59,5 +62,33 @@ export class UserService {
   logout() {
     localStorage.removeItem("id");
     this.router.navigate(['/login']); //Perfil
+  }
+
+  getAlbums(id: string){
+    return this.http.get(this.URL_API + `/getAlbums/${id}`);
+  }
+
+  getPhotosAlbum(idAlbum: Number){
+    return this.http.post(this.URL_API + `/getPhotosAlbum`,{idAlbum});
+  }
+
+  createAlbum(name: string, idUser: string){
+    return this.http.post(this.URL_API + `/createAlbum`,{name,idUser});
+  }
+
+  insertPhotoAlbum(idUser: string, description: string, extension: string, name: string, foto: string){
+    return this.http.post(this.URL_API + `/insertPhotoAlbum`,{idUser, description, extension, name, foto});
+  }
+
+  translate(language: string, text: string){
+    return this.http.post(this.URL_API + `/translate`,{language, text});
+  }
+
+  detectText(imagen: string){
+    return this.http.post(this.URL_API + `/detectText`,{imagen});
+  }
+  
+  profileAnalysis(foto: string){
+    return this.http.post(this.URL_API + `/profileAnalysis`,{foto});
   }
 }

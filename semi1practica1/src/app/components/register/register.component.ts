@@ -20,17 +20,37 @@ export class RegisterComponent implements OnInit {
   perfil: string; //Muestra perfil actual a editar
 
   isLog: boolean;
+  usser: User2;
 
   constructor(public userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     
-    if(localStorage.getItem("id")){
-      this.isLog = true;
-    }
-    else {
-      this.isLog = false;
-    }
+    this.userService.getUser(localStorage.getItem("id")).subscribe(res => {
+      //console.log("RESULTADO: ",res);
+      this.usser = res[0] as User2;
+      //console.log("RESULTADO: ", this.usser);
+
+      if (this.usser != undefined) {
+        console.log(this.usser);
+
+        //Asignando de un modelo a otro
+        this.userService.selectedUser.id_ = this.usser.id;
+        this.userService.selectedUser.username = this.usser.usuario;
+        this.userService.selectedUser.name = this.usser.nombre;
+        this.userService.selectedUser.password = this.usser.password;
+        this.userService.selectedUser.foto = this.usser.foto;
+
+        this.isLog = true;
+        this.perfil = this.userService.dirBucket + this.usser.foto;
+        
+      }
+      else {
+        this.router.navigate(['/login']);
+        this.isLog = false;
+      }
+
+    });
   }
 
   
@@ -51,6 +71,7 @@ export class RegisterComponent implements OnInit {
             .subscribe(res => {
               console.log(res);
               this.resetForm(form);
+              this.router.navigate(['/perfil']);
             });
           }
           else{
@@ -66,6 +87,7 @@ export class RegisterComponent implements OnInit {
           .subscribe(res => {
             console.log(res);
             this.resetForm(form);
+            this.router.navigate(['/perfil']);
           });
         }
       }
@@ -79,6 +101,7 @@ export class RegisterComponent implements OnInit {
           .subscribe(res => {
             console.log(res);
             this.resetForm(form);
+            this.router.navigate(['/dashboard']);
           });
 
         }else{
@@ -91,7 +114,7 @@ export class RegisterComponent implements OnInit {
               
               console.log(res);
               this.resetForm(form);
-
+              this.router.navigate(['/dashboard']);
             });
         }
       }

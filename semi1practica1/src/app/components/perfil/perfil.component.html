@@ -1,1 +1,96 @@
-<p>perfil works!</p>
+<div class="row">
+
+    <div class="col-md-3">
+    </div>
+
+    <!-- TABLE -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1 style="text-align:center">Perfil</h1>
+
+                <div style="width: 40%; height: 150px; text-align:center; margin: 0 auto;" class="card">
+                    <img alt="Foto perfil" width="100%" height="100%" [src]="perfil">
+                </div>
+
+                <table align="center">
+                    <tr>
+                        
+                    </tr>
+                    <tr>
+                        <td><b>Username:</b></td>
+                        <td>{{ usser.usuario }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Name:</b></td>
+                        <td>{{usser.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Foto:</b></td>
+                        <td>{{usser.foto}}</td>
+                    </tr>
+                    
+                </table>
+
+                <div style="text-align:center">
+
+                    <span *ngFor="let anal of profileAnalysis">
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.ageRange">{{anal.ageRange}}</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.Gender">{{anal.Gender}}</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.Smile === 'True'">Smile</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.Beard === 'True'">Beard</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.Eyeglasses === 'True'">Eyeglasses</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.Sunglasses === 'True'">Sunglasses</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.Mustache === 'True'">Mustache</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.EyesOpen === 'True'">EyesOpen</button>
+                        <button class="btn btn-outline-dark mr-2" *ngIf="anal.MouthOpen === 'True'">MouthOpen</button>
+                        
+                    </span>
+
+                    <span *ngFor="let emo of profileEmotions">
+                        <button class="btn btn-outline-dark mr-2">{{emo.Type}}</button>
+                    </span>
+
+                </div>
+                    
+                <br>
+                <br>
+                <div style="text-align:center">
+                    <button class="btn btn-dark mr-2" routerLink="/register">Editar</button>
+                </div>
+                <br>
+                <ngb-accordion [closeOthers]="true">
+                    <ngb-panel id="static-1" title="Extraer texto">
+                      <ng-template ngbPanelContent>
+
+                        <div style="width: 50%; float:left">
+                            <app-upload></app-upload>
+                         </div>
+                         
+                         <div style="width: 50%; float:right">
+                            <div style="text-align:center">
+                                <button class="btn btn-dark mr-2" (click)="extraer();">Extraer</button>
+
+                                <br>
+                                
+                                <div>
+                                    <p>{{concatTxt}}</p>
+                                </div>
+                                
+                                
+                            </div>
+                         </div>
+
+                          
+                        
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+    </div>
+
+</div>

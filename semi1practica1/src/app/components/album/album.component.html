@@ -1,0 +1,174 @@
+<h1 style="text-align:center">ALBUMS</h1>
+
+<div class="row">
+
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+
+        <div style="background-color: rgb(255, 255, 255);">
+            <div *ngFor="let album of albums">
+                <button style="width: 100%;" type="button" class="btn btn-outline-dark"
+                    (click)="verFotos(album.id)">{{album.name}}</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="col-md-6">
+
+        <!-- INICIANDO MODAL DE TRADUCCION -->
+        <ng-template #traducir let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Traducir</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                    <div>
+                        <form>
+                            <div class="form-group">
+                                <label >Seleccionar idioma traduccion</label>
+                                <select #lstalbum class="form-control" id="nombretraduccion">
+                                    <option *ngFor="let idioma of idiomas" [value]="idioma.id">{{idioma.name}}</option>
+                                </select>
+                                <br>
+                                <button type="button" class="btn btn-outline-dark" (click)="translate(lstalbum.value)">Traducir</button>
+                                <hr>
+                                <label><b>Texto a traducir: </b> {{textoATraducir}}</label>
+                                <br>
+                                <ng-container *ngIf="traduccion">
+                                    <span><b>Texto Traducido: </b> {{ traduccion }}</span>
+                                </ng-container>
+                            </div>
+                        </form>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+        </ng-template>
+        <!-- FINALIZANDO MODAL DE TRADUCCION -->
+
+
+        <div class="card text-white bg-dark">
+            <div class="card-body" *ngIf="photos?.length">
+
+                <ngb-carousel>
+                    <ng-template ngbSlide *ngFor="let foto of photos">
+                        <div class="picsum-img-wrapper">
+                            <img style="width: 100%;" [src]="userService.dirBucket + foto.photo"
+                                alt="Random first slide">
+                        </div>
+                        <div class="carousel-caption">
+                            <!--    
+                                <h3>Titulo imagen</h3> 
+                            -->
+                            <p>{{ foto.description }}</p>
+                            
+                            <button type="button" class="btn btn-light" (click)="traducirDescrip(traducir); textoATraducir=foto.description">Traducir</button>
+                        </div>
+
+                    </ng-template>
+                </ngb-carousel>
+
+                <!--
+                <div style="width: 40%; height: 150px; text-align:center; margin: 0 auto;" class="card">
+                    <img alt="Foto perfil" width="100%" height="100%" [src]="perfil">
+                </div>
+                <div style="text-align:center">
+                    <button class="btn btn-dark mr-2" routerLink="/register">Editar</button>
+                </div>
+
+                <div class="center">
+                    <img name="Foto perfil" alt="foto perfil" width="100px" height="100px"
+                        src="https://i.pinimg.com/originals/00/1a/26/001a260767c5529c002e1d6ff00ea01d.jpg">
+                </div>
+                <div class="center">
+                    <img name="Foto perfil" alt="foto perfil" width="100px" height="100px"
+                        src="https://images.pexels.com/photos/2625122/pexels-photo-2625122.jpeg">
+                </div>
+                -->
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Crear Album</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="namealbum">Nombre album</label>
+                        <div class="input-group">
+                            <input id="namealbum" style="text-align: center" class="form-control" type="text"
+                                name="namealbum" #namealbum placeholder="Ingrese nombre del nuevo album">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark"
+                    (click)="modal.close(namealbum.value); salida();">Save</button>
+            </div>
+        </ng-template>
+
+        <ng-template #content2 let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Subir foto</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                    <app-upload></app-upload>
+                    <hr>
+                    <div>
+                        <form>
+                            <div class="form-group">
+                                
+                                <div class="input-group">
+                                    <input id="namefoto" style="text-align: center" class="form-control" type="text"
+                                        name="namefoto" #namefoto placeholder="Ingrese nombre de foto">
+        
+                                </div>
+                                <div class="input-group">
+                                    <input id="descripcion" style="text-align: center" class="form-control" type="text"
+                                        name="descripcion" #descripcion placeholder="Ingrese descripcion de foto">
+        
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" (click)="modal.close('Close click'); subirPhotoAlbum(namefoto.value, descripcion.value);">Save</button>
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+        </ng-template>
+
+
+        <button style="width: 80%;" class="btn btn-lg btn-dark" (click)="open(content)">Crear Album</button>
+        <button style="width: 80%;" class="btn btn-lg btn-dark" (click)="modalUpload(content2)">Subir foto</button>
+
+        <!--
+            <pre>{{ closeResult }}</pre>
+        -->
+    </div>
+
+</div>
