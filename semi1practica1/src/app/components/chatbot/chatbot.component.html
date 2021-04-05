@@ -1,0 +1,30 @@
+<p>chatbot works!</p>
+
+<!--
+<div class="content" role="main">
+    <textarea readonly="readonly" name="conversation" rows="10" cols="80">
+    </textarea>
+    <br />
+    <span><input type="text" size="60" name="message" style="line-height:2.0em;" enterkeyhint="" />
+        <button type="button" style="line-height: 2em;">Send</button></span>
+</div>
+
+<div class="content" role="main">
+    <textarea readonly="readonly" name="conversation" [(ngModel)]="conversation" rows="10" cols="80"></textarea>
+    <br />
+    <span><input type="text" size="60" name="message" [(ngModel)]="message" style="line-height:2.0em;"
+            enterkeyhint="" />
+        <button (click)="startChat()" type="button" style="line-height: 2em;">Send</button></span>
+</div>
+-->
+
+<div class="content" role="main">
+    <h1>Chat Bot</h1>
+    <ng-container *ngFor="let message of messages">
+        <div>
+            {{message.sender}}: {{message.content}}
+        </div>
+    </ng-container>
+    <input [(ngModel)]="userInput" (keyup.enter)=postLexText()>
+    <button title="Post Lex Text Button" (click)="postLexText()"> Post Text </button>
+</div>

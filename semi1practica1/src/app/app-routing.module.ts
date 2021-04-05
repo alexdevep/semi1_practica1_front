@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlbumComponent } from './components/album/album.component';
 import { CameraComponent } from './components/camera/camera.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'album', component: AlbumComponent },
   { path: 'upload', component: UploadComponent },
-  { path: 'carousel', component: CarouselComponent }
+  { path: 'carousel', component: CarouselComponent },
+  { path: 'chatbot', component: ChatbotComponent }
 ];
 
 @NgModule({

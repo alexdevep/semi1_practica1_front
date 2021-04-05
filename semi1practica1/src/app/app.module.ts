@@ -21,6 +21,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { AlbumComponent } from './components/album/album.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     PerfilComponent,
     AlbumComponent,
     UploadComponent,
-    CarouselComponent
+    CarouselComponent,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
