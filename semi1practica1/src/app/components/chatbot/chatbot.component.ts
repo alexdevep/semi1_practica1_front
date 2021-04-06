@@ -37,7 +37,7 @@ export class ChatbotComponent implements OnInit {
   postLexText() {
     var params = {
       botAlias: "\$LATEST", //chatbot //
-      botName: "BookTrip_esLATAM",
+      botName: "chatbotx",
       inputText: "Testing",
       userId: "User", //lexusersemi1
     };
