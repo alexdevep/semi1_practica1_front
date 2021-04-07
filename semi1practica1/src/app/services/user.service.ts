@@ -14,8 +14,8 @@ export class UserService {
   logUsers: User[]; //User login
   photoB64: string;
 
-  //readonly URL_API = 'http://Balanceador-practica1-semi1-257155305.us-east-2.elb.amazonaws.com';
-  readonly URL_API = 'http://localhost:5000';
+  readonly URL_API = 'http://3.17.139.50:5000';
+  //readonly URL_API = 'http://localhost:5000';
   readonly dirBucket = 'https://practica1-g18-imagenes.s3.us-east-2.amazonaws.com/';
 
   constructor(private http: HttpClient, private router: Router) {

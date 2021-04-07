@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LexRuntime } from 'aws-sdk'; /* Al instalar 'npm install aws-sdk' da error la compilacion del servidor, solucion en comentario mas abajo */
 import { Message } from './messages';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { User2 } from 'src/app/models/user';
 
 @Component({
   selector: 'app-chatbot',
@@ -28,10 +31,28 @@ export class ChatbotComponent implements OnInit {
   messages: Message[] = [];
   lexState: string = 'Hola, escribe tu consulta.';
 
-  constructor() { }
+  usser: User2;
+  
+  constructor(public userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.messages.push(new Message(this.lexState, "Bot"));
+
+    this.userService.getUser(localStorage.getItem("id")).subscribe(res => {
+      //console.log("RESULTADO: ",res);
+      this.usser = res[0] as User2;
+      //console.log("RESULTADO: ", this.usser);
+
+      if (this.usser != undefined) {
+        
+        this.messages.push(new Message(this.lexState, "Bot"));
+      }
+      else {
+        this.router.navigate(['/login']);
+      }
+
+    });
+
+    
   }
 
   postLexText() {
