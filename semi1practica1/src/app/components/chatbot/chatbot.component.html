@@ -1,4 +1,3 @@
-<p>chatbot works!</p>
 
 <!--
 <div class="content" role="main">
@@ -20,11 +19,17 @@
 
 <div class="content" role="main">
     <h1>Chat Bot</h1>
-    <ng-container *ngFor="let message of messages">
-        <div>
-            {{message.sender}}: {{message.content}}
-        </div>
-    </ng-container>
+    <table>
+        <ng-container *ngFor="let message of messages">
+            <tr>
+                <td> 
+                    <b>{{message.sender}}:</b> {{message.content}}
+                </td>
+            </tr>
+        </ng-container>
+        
+    </table>
+    <br>
     <input [(ngModel)]="userInput" (keyup.enter)=postLexText()>
-    <button title="Post Lex Text Button" (click)="postLexText()"> Post Text </button>
+    <button class="btn btn-dark" title="Post Lex Text Button" (click)="postLexText()">Enviar</button>
 </div>

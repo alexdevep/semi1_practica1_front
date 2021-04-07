@@ -281,3 +281,9 @@ svg#rocket-smoke {
     visibility: hidden;
 }
 }
+
+table {
+    border: rgb(2, 2, 2) 2px solid;
+    width: 50%;
+    background-color: white;
+  }

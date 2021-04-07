@@ -26,7 +26,7 @@ export class ChatbotComponent implements OnInit {
   lex: LexRuntime;
   userInput: string = '';
   messages: Message[] = [];
-  lexState: string = 'Hi what would you like to do';
+  lexState: string = 'Hola, escribe tu consulta.';
 
   constructor() { }
 
