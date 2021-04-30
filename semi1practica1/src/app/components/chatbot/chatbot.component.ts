@@ -64,8 +64,8 @@ export class ChatbotComponent implements OnInit {
     };
 
     this.lex = new LexRuntime({
-      accessKeyId: "AKIATP32HZSCEPG2EY46",
-      secretAccessKey: "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",
+      accessKeyId: "keyid",
+      secretAccessKey: "keyaccess",
       region: "us-east-1"
     });
 
